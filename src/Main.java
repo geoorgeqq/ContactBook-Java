@@ -1,14 +1,14 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
-
         Logic contactLogic = new Logic();
-        contactLogic.add(new Contact("George", "0721222222"));
-        contactLogic.add(new Contact("Mihai", "0722111111"));
+        FileHandler fileHandler = new FileHandler(contactLogic);
         System.out.println();
         System.out.println("ContactApp \n-------");
+        fileHandler.read();
         contactLogic.print();
 
         while (true) {
@@ -18,6 +18,7 @@ public class Main {
             System.out.println("3 - Quit");
             String command = scanner.nextLine();
             if (command.equals("3")) {
+                fileHandler.write();
                 break;
             }
             if (command.equals("1")) {

@@ -1,3 +1,5 @@
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +16,18 @@ public class Logic {
         } else {
             System.out.println("Invalid phone number!");
         }
+    }
 
+    public int getSize(){
+        return this.contacts.size();
+    }
+
+    public void writeItem(BufferedWriter bw) throws IOException {
+        for (int i = 0; i < contacts.size(); i++) {
+            bw.write(contacts.get(i).getContactName()+"\n");
+            bw.write(contacts.get(i).getContactNumber()+"\n");
+        }
+        bw.close();
     }
 
     public void remove(String contact) {
