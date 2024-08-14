@@ -18,14 +18,14 @@ public class Logic {
         }
     }
 
-    public int getSize(){
+    public int getSize() {
         return this.contacts.size();
     }
 
     public void writeItem(BufferedWriter bw) throws IOException {
         for (int i = 0; i < contacts.size(); i++) {
-            bw.write(contacts.get(i).getContactName()+"\n");
-            bw.write(contacts.get(i).getContactNumber()+"\n");
+            bw.write(contacts.get(i).getContactName() + "\n");
+            bw.write(contacts.get(i).getContactNumber() + "\n");
         }
         bw.close();
     }
