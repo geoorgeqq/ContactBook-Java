@@ -8,12 +8,18 @@ public class Logic {
     }
 
     public void add(Contact contact) {
-        contacts.add(contact);
+        if (contact.getContactNumber().length() == 10) {
+            contacts.add(contact);
+            contact.setContactName(contact.getContactName());
+        } else {
+            System.out.println("Invalid phone number!");
+        }
+
     }
 
-    public void remove(String contact){
+    public void remove(String contact) {
         for (int i = 0; i < contacts.size(); i++) {
-            if(contacts.get(i).getContactName().toLowerCase().contains(contact.toLowerCase())){
+            if (contacts.get(i).getContactName().toLowerCase().contains(contact.toLowerCase())) {
                 contacts.remove(i);
             }
         }
@@ -26,18 +32,19 @@ public class Logic {
         }
     }
 
-    public void updateName(String contact, String updatedName){
+    public void updateName(String contact, String updatedName) {
         for (int i = 0; i < contacts.size(); i++) {
-            if(contacts.get(i).getContactName().toLowerCase().contains(contact)){
+            if (contacts.get(i).getContactName().toLowerCase().contains(contact.toLowerCase())) {
                 contacts.get(i).setContactName(updatedName);
             }
         }
     }
 
-    public void updateNumber(String contact, String updateNumber){
+    public void updateNumber(String contact, String updateNumber) {
         for (int i = 0; i < contacts.size(); i++) {
-            if(contacts.get(i).getContactName().toLowerCase().contains(contact)){
-                contacts.get(i).setContactNumber(updateNumber);
+            if (contacts.get(i).getContactName().toLowerCase().contains(contact.toLowerCase())) {
+                if (updateNumber.length() == 10)
+                    contacts.get(i).setContactNumber(updateNumber);
             }
         }
     }

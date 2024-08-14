@@ -2,28 +2,30 @@ public class Contact {
     private String contactName;
     private String contactNumber;
 
-    public Contact(String contactName, String contactNumber){
+    public Contact(String contactName, String contactNumber) {
         this.contactName = contactName;
         this.contactNumber = contactNumber;
     }
 
-    public String getContactName(){
+    public String getContactName() {
         return this.contactName;
     }
 
-    public String getContactNumber(){
+    public String getContactNumber() {
         return this.contactNumber;
     }
 
-    public String toString(){
-        return "Name: "+this.contactName+"\n"+"Phone number: "+this.contactNumber+"\n"+"-------";
+
+    public void setContactName(String updateContactName) {
+        this.contactName = updateContactName.substring(0, 1).toUpperCase() + updateContactName.substring(1);
     }
 
-    public void setContactName(String updateContactName){
-        this.contactName = updateContactName;
+    public void setContactNumber(String updateContactNumber) {
+        this.contactNumber = updateContactNumber;
+
     }
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
+    public String toString() {
+        return "Name: " + this.contactName + "\n" + "Phone number: " + this.contactNumber + "\n" + "-------";
     }
 }
