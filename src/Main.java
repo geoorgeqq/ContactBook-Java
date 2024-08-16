@@ -1,16 +1,18 @@
 import java.io.IOException;
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
+        DbFunctions db = new DbFunctions();
+        Connection conn = db.connect_to_db("contactsDB","postgres","zxcasd123");
         Logic contactLogic = new Logic();
+        String table = "contacts";
         FileHandler fileHandler = new FileHandler(contactLogic);
         System.out.println();
         System.out.println("ContactApp \n-------");
-        fileHandler.read();
-        contactLogic.print();
-
+        db.listItems(conn,table);
         while (true) {
             System.out.println("Available commands:");
             System.out.println("1 - Add contact");
@@ -18,7 +20,6 @@ public class Main {
             System.out.println("3 - Quit");
             String command = scanner.nextLine();
             if (command.equals("3")) {
-                fileHandler.write();
                 break;
             }
             if (command.equals("1")) {
@@ -28,17 +29,17 @@ public class Main {
                 System.out.println("Phone number:");
                 String number = scanner.nextLine();
                 System.out.println();
-                contactLogic.add(new Contact(name, number));
-                contactLogic.print();
+                db.addContact(conn,table,name, number);
+                db.listItems(conn,table);
             } else if (command.equals("2")) {
                 System.out.println("Contact to be selected: ");
                 String contact = scanner.nextLine();
                 System.out.println("Remove or edit?");
                 String choice = scanner.nextLine();
                 if (choice.equals("remove")) {
-                    contactLogic.remove(contact);
+                    db.removeItem(conn,table,contact);
                     System.out.println("Updated contacts: ");
-                    contactLogic.print();
+                    db.listItems(conn,table);
                 } else if (choice.equals("edit")) {
                     System.out.println("Edit name/phone number/both");
                     String editChoice = scanner.nextLine();
